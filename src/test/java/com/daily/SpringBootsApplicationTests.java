@@ -19,8 +19,7 @@ public class SpringBootsApplicationTests {
 
 	@Autowired
 	private TalkMapper talkMapper;
-	@Autowired
-	private Sender sender;
+
 	@Test
 	public void contextLoads() {
 		TalkExample example=new TalkExample();
@@ -39,9 +38,9 @@ public class SpringBootsApplicationTests {
 	* 描述 测试MQ 
 	*
 	**/
-	@Test
-	public void hello() throws Exception {
-		sender.send();
-	}
+//	@Test
+//	public void hello() throws Exception {
+//		sender.send();
+//	}
 
 }

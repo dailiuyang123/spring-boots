@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
  * Created by json on 2018/5/8.
  * Describe: MQ 接收者
  */
-@Component
-@RabbitListener(queues = "hello")
+//@Component
+//@RabbitListener(queues = "hello")
 public class Receiver {
 
     @RabbitHandler
