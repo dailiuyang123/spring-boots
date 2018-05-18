@@ -13,7 +13,7 @@ import java.util.Date;
  * Describe:
  */
 @Component
-@EnableScheduling  //启用定时任务
+//@EnableScheduling  //启用定时任务
 public class QutarzDemo {
 
     public final static long SECOND = 1 * 1000;
