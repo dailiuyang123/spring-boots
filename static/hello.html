@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>html hello world</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/echarts.js"></script>
+</head>
+<script type="text/javascript">
+    console.log("hello world");
+</script>
+<body>
+<h1>hello world</h1>
+
+<body>
+<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+<div id="main" style="width: 600px;height:400px;"></div>
+</body>
+<script type="text/javascript">
+
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    var type_data=['频率'];
+    var X_data=["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"];
+    var Y_data=[{
+        // type_data与name保持一致
+        name: '频率',
+        type: 'bar',
+        data: [5, 20, 36, 10, 10, 20]
+    }];
+
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            //图标标题
+            text: '日志分析图'
+        },
+        tooltip: {},
+        //数据类型
+        legend: {
+            data: type_data
+        },
+        // X 坐标轴
+        xAxis: {
+            data:X_data
+        },
+        yAxis: {},
+        //Y 坐标轴
+        series:Y_data
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+</body>
+</html>
