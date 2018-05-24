@@ -23,4 +23,18 @@ public class TestOne {
         RemoteApiInvoke remoteApiInvoke=new RemoteApiInvoke();
         Map map = remoteApiInvoke.invokeRemoteApi();
     }
+    
+    /**
+    *
+    * 作者  json
+    * 时间  2018/5/24 10:22
+    * 描述 二叉树 遍历
+    *
+    **/
+    @Test
+    public void testTree(){
+
+        
+    }
+    
 }
