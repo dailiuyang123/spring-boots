@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Created by json on 2018/5/22.
- * Describe:
+ * Describe: springboot  拦截器
  */
 @Configuration
 public class MyFilterConfig {

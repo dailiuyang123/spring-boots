@@ -6,15 +6,55 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/echarts.js"></script>
 </head>
-<script type="text/javascript">
-    console.log("hello world");
-</script>
+
 <body>
 <h1>hello world</h1>
 
 <body>
 <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
 <div id="main" style="width: 600px;height:400px;"></div>
+<hr>
+<div id="editor">
+    <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+</div>
+<button id="btn1">获取html</button>
+<!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
+<script type="text/javascript" src="blog/assets/js/wangEditor.min.js"></script>
+<script type="text/javascript">
+    var E = window.wangEditor;
+    var editor = new E('#editor');
+    // 或者 var editor = new E( document.getElementById('editor') )
+    editor.create();
+    document.getElementById('btn1').addEventListener('click', function () {
+        // 读取 html
+        alert(editor.txt.html());
+        console.log(editor.txt.html());
+    }, false);
+</script>
+<hr>
+<div id="text"></div>
+<hr>
+<h3>富文本 实现文件上传</h3>
+<div id="div1">
+    <p>欢迎使用 wangEditor 富文本编辑器</p>
+</div>
+
+<script type="text/javascript" src="/wangEditor.min.js"></script>
+<script type="text/javascript">
+    var E = window.wangEditor
+    var editor = new E('#div1')
+
+    // 配置服务器端地址
+    editor.customConfig.uploadImgServer = '/upload'
+
+    // 进行下文提到的其他配置
+    // ……
+    // ……
+    // ……
+
+    editor.create()
+</script>
+
 </body>
 <script type="text/javascript">
 
@@ -55,4 +95,10 @@
 </script>
 
 </body>
+<script type="text/javascript">
+    console.log("hello world");
+    var value="<h1>一级标题</h1><h2>二级标题</h2><h3>三级标题</h3><p><br></p>";
+    document.getElementById("text").innerHTML=value;
+
+</script>
 </html>

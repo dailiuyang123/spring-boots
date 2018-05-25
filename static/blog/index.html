@@ -22,14 +22,16 @@
 		<meta name="msapplication-TileColor" content="#0e90d2">
 		<link rel="stylesheet" href="assets/css/amazeui.min.css">
 		<link rel="stylesheet" href="assets/css/app.css">
+        <!--引入 外部的js文件-->
         <script src="assets/js/baseUrl.js"></script>
 		<script src="assets/js/jquery.min.js"></script>
 		<script type="text/javascript">
 			console.log("hello");
 			console.log(url);
+			//查询 所有的talk数据
 			$.ajax({
 				type: "get",
-				url: talkUrl,
+				url: getTalksUrl,
 				async: true,
 				success: function(result) {
                     console.log(result);
@@ -38,7 +40,6 @@
                     window.alert("啊 报错拉");
 				}
 			});
-
 
 		</script>
 	</head>
