@@ -8,8 +8,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @SpringBootApplication
-//@EnableCaching  //开启缓存
-
 @MapperScan("com.daily.mybatis.dao")
 public class SpringBootsApplication {
 
