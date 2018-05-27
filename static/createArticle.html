@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新建博客</title>
+    <script src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="blog/assets/js/wangEditor.min.js"></script>
+
+    <style type="text/css">
+       .expc{width:80%; border:1px solid #060; padding:10px} 
+    </style>
+</head>
+
+<body>
+<h1>新建博客</h1>
+<div  class="expc">
+<input id="title" type="text" style="  display: block;
+                width: 80%;
+                height: 40px;
+                line-height: 40px;
+                box-sizing: border-box;
+                padding: 0 16px;
+                border: none;
+                background-color: #efefef;
+                color: #4f4f4f;" id="txtTitle" maxlength="100" placeholder="输入文章标题">
+                <br>
+<div id="div1" class="toolbar" >
+    <p></p>
+</div>
+<button id="btn2">获取html</button>
+</div>
+<script src="blog/assets/js/baseUrl.js"></script>
+<script type="text/javascript">
+
+    var E = window.wangEditor
+    var editor = new E('#div1')
+    editor.customConfig.zIndex = 100;
+    // 配置服务器端地址
+    editor.customConfig.uploadImgServer = 'http://localhost:8686/file/uploadImage';
+
+    // 进行下文提到的其他配置
+    editor.customConfig.uploadImgHooks = {
+        before: function (xhr, editor, files) {
+            // 图片上传之前触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，files 是选择的图片文件
+
+            // 如果返回的结果是 {prevent: true, msg: 'xxxx'} 则表示用户放弃上传
+            // return {
+            //     prevent: true,
+            //     msg: '放弃上传'
+            // }
+        },
+        success: function (xhr, editor, result) {
+            // 图片上传并返回结果，图片插入成功之后触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+        },
+        fail: function (xhr, editor, result) {
+            // 图片上传并返回结果，但图片插入错误时触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+        },
+        error: function (xhr, editor) {
+            // 图片上传出错时触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
+        },
+        timeout: function (xhr, editor) {
+            // 图片上传超时时触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
+        },
+
+        // 如果服务器端返回的不是 {errno:0, data: [...]} 这种格式，可使用该配置
+        // （但是，服务器端返回的必须是一个 JSON 格式字符串！！！否则会报错）
+        customInsert: function (insertImg, result, editor) {
+            // 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）
+            // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
+
+            // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
+            var url = result.url
+            insertImg(url)
+
+            // result 必须是一个 JSON 格式字符串！！！否则报错
+        }
+
+    }
+	editor.customConfig.zIndex = 100;
+    editor.create();
+    //获取 html 数据
+    document.getElementById('btn2').addEventListener('click', function () {
+        // 读取 html
+        alert(editor.txt.html());
+        var content=editor.txt.html();
+        console.log(editor.txt.html());
+        //保存數據
+         var tilte= document.getElementById("title").value;
+
+       $.ajax({
+       	type:"post",
+       	url:"http://localhost:8686/article/createArticle",
+       	async:true,
+        data:{"title":tilte,
+        			"content":content
+                 },
+        success:function (result) {
+           if(result=="内部错误"){
+               window.alert("创建失败！");
+           } else {
+               window.alert("创建成功！");
+           }
+        } ,
+          error:function () {
+              window.alert("请求失败")
+          }
+       });
+       
+    }, false);
+</script>
+
+</body>
+
+</html>
