@@ -92,7 +92,7 @@
 			<div class="am-u-md-8 am-u-sm-12">
 				<article class="am-article blog-article-p">
 					<div class="am-article-hd">
-						<h1 class="am-article-title blog-text-center">我的文章哎</h1>
+						<h1 class="am-article-title blog-text-center" id="title">我的文章哎</h1>
 						<p class="am-article-meta blog-text-center">
 							<span><a href="#" class="blog-color">article &nbsp;</a></span>-
 							<span><a href="#">@amazeUI &nbsp;</a></span>-
@@ -117,7 +117,9 @@
 										console.log(data);
 										content=data.articelContent;
 										console.log(content);
+										console.log(data.articelTitle);
 										document.getElementById("blogContent").innerHTML=content;
+										document.getElementById("title").innerHTML=data.articelTitle;
 								},
 								error: function() {
 									console.log("请求失败")

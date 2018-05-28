@@ -19,12 +19,13 @@
 				margin-left: auto;
 				margin-right: auto;
 			}
+			
 		</style>
 
 	</head>
 
 	<body>
-		
+
 		<h1 style="text-align: center;">新建博客</h1>
 		<div class="expc">
 			<h2>请输入标题</h2>
@@ -42,9 +43,20 @@
 			<div id="div1" class="toolbar">
 				<p></p>
 			</div>
+			<br>
+			<button class="btn-add-tag" id="addTag" onclick="clicks()">添加标签</button>
+			<div id="tag"></div>
+			<br>
+			<br>
 			<button id="btn2">保存</button>
 		</div>
-
+		<script type="text/javascript">
+			function clicks(){
+				document.getElementById("tag").innerHTML="<input type='text' id='tagvalue' />";
+			}
+			
+		</script>
+		
 		<script type="text/javascript">
 			console.log(createArticle);
 			var E = window.wangEditor
@@ -106,14 +118,15 @@
 				console.log(editor.txt.html());
 				//保存數據
 				var tilte = document.getElementById("title").value;
-
+				var tag=document.getElementById("tagvalue").value;	
 				$.ajax({
 					type: "post",
 					url: "http://localhost:8686/article/createArticle",
 					async: true,
 					data: {
 						"title": tilte,
-						"content": content
+						"content": content,
+						"tag":tag
 					},
 					success: function(result) {
 						if(result == "内部错误") {
