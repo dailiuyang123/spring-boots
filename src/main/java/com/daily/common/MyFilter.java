@@ -44,6 +44,10 @@ public class MyFilter implements Filter {
         String requestURI = httprequest.getRequestURI();
         System.out.println("请求路径："+requestURI);
         logger.error(requestURI);
+        //设置编码解码格式为：UTF-8
+        httprequest.setCharacterEncoding("UTF-8");
+        httpresponse.setCharacterEncoding("UTF-8");
+
         String method = httprequest.getMethod();
         System.out.println("请求方式:"+method);
 
