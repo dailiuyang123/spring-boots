@@ -4,6 +4,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>新建博客</title>
+
 		<!--引入js-->
 
 		<!--优先加载 js文件 -->
@@ -27,6 +28,7 @@
 	<body>
 
 		<h1 style="text-align: center;">新建博客</h1>
+		<a  href="blog/index.html">返回首页</a>
 		<div class="expc">
 			<h2>请输入标题</h2>
 			<input id="title" type="text" style="  display: block;
@@ -118,7 +120,8 @@
 				console.log(editor.txt.html());
 				//保存數據
 				var tilte = document.getElementById("title").value;
-				var tag=document.getElementById("tagvalue").value;	
+				var tag='';
+
 				$.ajax({
 					type: "post",
 					url: "http://localhost:8686/article/createArticle",
