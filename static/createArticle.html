@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8">
-		<title>新建博客</title>
+<head>
+    <meta charset="UTF-8">
+    <title>新建博客</title>
 
-		<!--引入js-->
+    <!--引入js-->
 
-		<!--优先加载 js文件 -->
-		<!--<link rel="preload" href="xx.js" as="script">-->
-		<script src="blog/assets/js/baseUrl.js"></script>
-		<script src="blog/assets/js/jquery.min.js"></script>
-		<script src="blog/assets/js/wangEditor.min.js"></script>
-		<style type="text/css">
-			.expc {
-				width: 80%;
-				border: 1px solid #060;
-				padding: 10px;
-				margin-left: auto;
-				margin-right: auto;
-			}
-			
-		</style>
+    <!--优先加载 js文件 -->
+    <!--<link rel="preload" href="xx.js" as="script">-->
+    <script src="blog/assets/js/baseUrl.js"></script>
+    <script src="blog/assets/js/jquery.min.js"></script>
+    <script src="blog/assets/js/wangEditor.min.js"></script>
+    <style type="text/css">
+        .expc {
+            width: 80%;
+            border: 1px solid #060;
+            padding: 10px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-	</head>
+    </style>
 
-	<body>
+</head>
 
-		<h1 style="text-align: center;">新建博客</h1>
-		<a  href="blog/index.html">返回首页</a>
-		<div class="expc">
-			<h2>请输入标题</h2>
-			<input id="title" type="text" style="  display: block;
+<body>
+
+<h1 style="text-align: center;">新建博客</h1>
+<a href="blog/index.html">返回首页</a>
+<div class="expc">
+    <h2>请输入标题</h2>
+    <input id="title" type="text" style="  display: block;
                 width: 80%;
                 height: 40px;
                 line-height: 40px;
@@ -40,112 +40,124 @@
                 border: none;
                 background-color: #efefef;
                 color: #4f4f4f;" id="txtTitle" maxlength="100" placeholder="输入文章标题">
-			<br>
-			<hr>
-			<div id="div1" class="toolbar">
-				<p></p>
-			</div>
-			<br>
-			<button class="btn-add-tag" id="addTag" onclick="clicks()">添加标签</button>
-			<div id="tag"></div>
-			<br>
-			<br>
-			<button id="btn2">保存</button>
-		</div>
-		<script type="text/javascript">
-			function clicks(){
-				document.getElementById("tag").innerHTML="<input type='text' id='tagvalue' />";
-			}
-			
-		</script>
-		
-		<script type="text/javascript">
-			console.log(createArticle);
-			var E = window.wangEditor
-			var editor = new E('#div1')
-			editor.customConfig.zIndex = 100;
-			// 配置服务器端地址
-			editor.customConfig.uploadImgServer = 'http://localhost:8686/file/uploadImage';
+    <br>
+    <hr>
+    <div id="div1" class="toolbar">
+        <p></p>
+    </div>
+    <br>
+    <button class="btn-add-tag" id="addTag" onclick="clicks()">添加标签</button>
+    <div id="tag"></div>
+    <br>
+    <br>
+    <button id="btn2">保存</button>
+</div>
+<script type="text/javascript">
+    function clicks() {
+        document.getElementById("tag").innerHTML = "<input type='text' id='tagvalue' />";
+    }
 
-			// 进行下文提到的其他配置
-			editor.customConfig.uploadImgHooks = {
-				before: function(xhr, editor, files) {
-					// 图片上传之前触发
-					// xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，files 是选择的图片文件
+</script>
 
-					// 如果返回的结果是 {prevent: true, msg: 'xxxx'} 则表示用户放弃上传
-					// return {
-					//     prevent: true,
-					//     msg: '放弃上传'
-					// }
-				},
-				success: function(xhr, editor, result) {
-					// 图片上传并返回结果，图片插入成功之后触发
-					// xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
-				},
-				fail: function(xhr, editor, result) {
-					// 图片上传并返回结果，但图片插入错误时触发
-					// xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
-				},
-				error: function(xhr, editor) {
-					// 图片上传出错时触发
-					// xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
-				},
-				timeout: function(xhr, editor) {
-					// 图片上传超时时触发
-					// xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
-				},
+<script type="text/javascript">
+    console.log(createArticle);
+    var E = window.wangEditor
+    var editor = new E('#div1')
+    editor.customConfig.zIndex = 100;
+    // 配置服务器端地址
+    editor.customConfig.uploadImgServer = 'http://localhost:8686/file/uploadImage';
 
-				// 如果服务器端返回的不是 {errno:0, data: [...]} 这种格式，可使用该配置
-				// （但是，服务器端返回的必须是一个 JSON 格式字符串！！！否则会报错）
-				customInsert: function(insertImg, result, editor) {
-					// 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）
-					// insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
+    // 进行下文提到的其他配置
+    editor.customConfig.uploadImgHooks = {
+        before: function (xhr, editor, files) {
+            // 图片上传之前触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，files 是选择的图片文件
 
-					// 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
-					var url = result.url
-					insertImg(url)
+            // 如果返回的结果是 {prevent: true, msg: 'xxxx'} 则表示用户放弃上传
+            // return {
+            //     prevent: true,
+            //     msg: '放弃上传'
+            // }
+        },
+        success: function (xhr, editor, result) {
+            // 图片上传并返回结果，图片插入成功之后触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+        },
+        fail: function (xhr, editor, result) {
+            // 图片上传并返回结果，但图片插入错误时触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+        },
+        error: function (xhr, editor) {
+            // 图片上传出错时触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
+        },
+        timeout: function (xhr, editor) {
+            // 图片上传超时时触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
+        },
 
-					// result 必须是一个 JSON 格式字符串！！！否则报错
-				}
+        // 如果服务器端返回的不是 {errno:0, data: [...]} 这种格式，可使用该配置
+        // （但是，服务器端返回的必须是一个 JSON 格式字符串！！！否则会报错）
+        customInsert: function (insertImg, result, editor) {
+            // 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）
+            // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
 
-			}
-			editor.customConfig.zIndex = 100;
-			editor.create();
-			//获取 html 数据
-			document.getElementById('btn2').addEventListener('click', function() {
-				// 读取 html
-				alert(editor.txt.html());
-				var content = editor.txt.html();
-				console.log(editor.txt.html());
-				//保存數據
-				var tilte = document.getElementById("title").value;
-				var tag='';
+            // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
+            var url = result.url
+            insertImg(url)
 
-				$.ajax({
-					type: "post",
-					url: "http://localhost:8686/article/createArticle",
-					async: true,
-					data: {
-						"title": tilte,
-						"content": content,
-						"tag":tag
-					},
-					success: function(result) {
-						if(result == "内部错误") {
-							window.alert("创建失败！");
-						} else {
-							window.alert("创建成功！");
-						}
-					},
-					error: function() {
-						window.alert("请求失败")
-					}
-				});
+            // result 必须是一个 JSON 格式字符串！！！否则报错
+        }
 
-			}, false);
-		</script>
+    }
+    editor.customConfig.zIndex = 100;
+    editor.create();
+    //获取 html 数据
+    document.getElementById('btn2').addEventListener('click', function () {
+        // 读取 html
+        alert(editor.txt.html());
+        var content = editor.txt.html();
+        console.log(editor.txt.html());
+        //保存數據
+        var tilte = document.getElementById("title").value;
 
-	</body>
+        var tag = document.getElementById("tagvalue");
+        if (tag != null) {
+            window.alert("有值哦");
+            if (tag.value) {
+                tag = tag.value;
+            } else {
+                tag = null;
+            }
+
+        } else {
+            tag = null;
+        }
+
+        $.ajax({
+            type: "post",
+            url: "http://localhost:8686/article/createArticle",
+            async: true,
+            data: {
+                "title": tilte,
+                "content": content,
+                "tag": tag
+            },
+            success: function (result) {
+                if (result == "内部错误") {
+                    window.alert("创建失败！");
+                } else {
+                    window.alert("创建成功！");
+                }
+            },
+            error: function () {
+                window.alert("请求失败")
+            }
+        });
+
+    }, false);
+</script>
+
+</body>
 
 </html>

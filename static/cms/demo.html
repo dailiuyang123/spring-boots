@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>测试demo</title>
+    <!-- Iconos -->
+
+</head>
+<body>
+<!--左侧-->
+<ul class="nav navbar-nav" id="indexMenu">
+    <li><a  target="../blog/index.html">首页</a></li>
+    <li><a  target="new/new.html">新闻</a></li>
+    <li><a target="leave/leave.html">留言</a></li>
+    <li><a target="download/download.html">资料下载</a></li>
+</ul>
+<!--展示部分-->
+<div id="iframeContent" style="border: 1px solid #060;"></div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $.get("index.html",function(data){
+            $("#iframeContent").html(data);//初始化加载界面
+        });
+
+        $('#indexMenu li').click(function(){//点击li加载界面
+            var current = $(this),
+                target = current.find('a').attr('target'); // 找到链接a中的targer的值
+
+            $.get(target,function(data){
+                $("#iframeContent").html(data);
+            });
+        });
+    });
+</script>
+</html>
