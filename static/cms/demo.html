@@ -3,19 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>测试demo</title>
-    <!-- Iconos -->
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/leftnav.css" media="screen" type="text/css">
 
+    <!-- Iconos -->
+    <style>
+        .navbar-nav{
+            float: left;
+            width: 20%;
+        }
+        #iframeContent{
+            border: 1px solid #060;
+            float: left;
+            width: 80%;
+        }
+
+
+    </style>
 </head>
 <body>
 <!--左侧-->
-<ul class="nav navbar-nav" id="indexMenu">
+
+<ul class="navbar-nav" id="indexMenu">
     <li><a  target="../blog/index.html">首页</a></li>
     <li><a  target="new/new.html">新闻</a></li>
     <li><a target="leave/leave.html">留言</a></li>
     <li><a target="download/download.html">资料下载</a></li>
 </ul>
 <!--展示部分-->
-<div id="iframeContent" style="border: 1px solid #060;"></div>
+<div id="iframeContent"></div>
 </body>
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript">
