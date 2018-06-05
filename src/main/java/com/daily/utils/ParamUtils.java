@@ -15,6 +15,13 @@ import java.util.Map;
  */
 public class ParamUtils {
 
+    /**
+    *
+    * 作者  json
+    * 时间  2018/6/5 15:10
+    * 描述  获取参数 / 通过 内置 方法/ request.getParameterMap();
+    *
+    **/
     public static Map getParam(HttpServletRequest request) {
         // 参数Map
         Map properties = request.getParameterMap();
@@ -47,7 +54,7 @@ public class ParamUtils {
     /**
     *  Author: 代刘洋
     *  Time：  2018/4/1  16:05
-    *  获取参数
+    *  获取参数 通过 请求（request）的Body的数据通过流的方式
     */
     public static Map getParams(HttpServletRequest request) {
         //获取参数
