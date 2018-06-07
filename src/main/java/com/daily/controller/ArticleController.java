@@ -28,6 +28,13 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
+    /**
+    *
+    * 作者  json
+    * 时间  2018/6/7 17:20
+    * 描述 新建博客
+    *
+    **/
     @RequestMapping(value = "/createArticle",method = RequestMethod.POST)
     public String createArticle(HttpServletRequest request, HttpServletResponse response){
         Map param = ParamUtils.getParam(request);

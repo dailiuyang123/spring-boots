@@ -15,7 +15,7 @@
 		</commentGenerator>
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-						connectionURL="jdbc:mysql://localhost:3306/daily" userId="root" password="123">
+						connectionURL="jdbc:mysql://localhost:3306/daily" userId="root" password="123456">
 		</jdbcConnection>
 
 		<javaTypeResolver>
@@ -41,7 +41,7 @@
                 比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate &ndash;&gt;
             &lt;!&ndash;<property name="useActualColumnNames" value="true"/>&ndash;&gt;
         </table>-->
-		<table tableName="t_article" domainObjectName="Article">
+		<table tableName="t_article_tag" domainObjectName="ArticleTag">
 			<property name="useActualColumnNames" value="true"/>
 		</table>
 	</context>

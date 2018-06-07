@@ -1,19 +1,16 @@
 package com.daily.service;
 
 import com.daily.mybatis.dao.ArticleMapper;
-import com.daily.mybatis.entity.Article;
-import com.daily.mybatis.entity.ArticleExample;
-import com.daily.mybatis.entity.ArticleWithBLOBs;
+import com.daily.mybatis.dao.ArticleTagMapper;
+import com.daily.mybatis.dao.TagMapper;
+import com.daily.mybatis.entity.*;
 import com.daily.utils.IdGenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Azir on 2018/5/27.
@@ -25,6 +22,12 @@ public class ArticleService {
 @Autowired
     private ArticleMapper articleMapper;
 
+@Autowired
+    private TagMapper tagMapper;
+
+@Autowired
+    private ArticleTagMapper articleTagMapper;
+
 
    public void  createArticle(Map param){
 
@@ -33,6 +36,26 @@ public class ArticleService {
        articleWithBLOBs.setArticelContent(param.get("content").toString());
        articleWithBLOBs.setPublishTime(new Date());
        articleWithBLOBs.setArticleId(IdGenUtils.UUID());
+       //标签 处理
+       if (!StringUtils.isEmpty(param.get("tag"))){
+           TagExample tagExample=new TagExample();
+           TagExample.Criteria criteria = tagExample.createCriteria();
+           criteria.andNameEqualTo(param.get("tag").toString());
+           List<Tag> tags = tagMapper.selectByExample(tagExample);
+           if (tags.size()==0){
+               Tag tag=new Tag();
+               tag.setId(IdGenUtils.UUID());
+               tag.setName(param.get("tag").toString());
+               tag.setCreate_time(new Date());
+               tagMapper.insertSelective(tag);
+                ArticleTag articleTag=new ArticleTag();
+                articleTag.setArticle_id(articleWithBLOBs.getArticleId());
+                articleTag.setTag_id(tag.getId());
+                articleTagMapper.insertSelective(articleTag);
+           }
+       }
+
+
     articleMapper.insertSelective(articleWithBLOBs);
 
    }
