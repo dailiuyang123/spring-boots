@@ -2,7 +2,9 @@ package com.daily.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,11 +25,19 @@ public class ReadConfig {
 
     public static Map<String, String> readValue() {
         Map map = new HashMap();
+        //传统方法
         String path = ReadConfig.class.getResource("/").getPath() + "PersonConfig.properties";
+
+
+        String resource = ReadConfig.class.getClassLoader().getResource("PersonConfig.properties").getPath();
         Properties properties = new Properties();
+
         try {
-            FileInputStream inputStream = new FileInputStream(path);
-            properties.load(new InputStreamReader(inputStream,"GBK"));
+
+           // FileInputStream inputStream = new FileInputStream(resource);
+            ReadConfig readConfig=new ReadConfig();
+            InputStream read = readConfig.read();
+            properties.load(new InputStreamReader(read,"GBK"));
             Enumeration<?> enumeration = properties.propertyNames();
             for (Object o : properties.keySet()) {
                 map.put(o, properties.getProperty(o.toString()));
@@ -39,6 +49,13 @@ public class ReadConfig {
         }
 
         return map;
+    }
+
+    
+    //项目以jar包运行时，加载配置文件 读取不到的问题
+    public InputStream read(){
+        InputStream resourceAsStream = this.getClass().getResourceAsStream("/PersonConfig.properties");
+        return resourceAsStream;
     }
 
 

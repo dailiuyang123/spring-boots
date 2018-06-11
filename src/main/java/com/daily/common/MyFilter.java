@@ -51,6 +51,9 @@ public class MyFilter implements Filter {
         String method = httprequest.getMethod();
         System.out.println("请求方式:"+method);
 
+        //解决跨域问题
+        httpresponse.setHeader("Access-Control-Allow-Origin", "*");
+        httpresponse.setHeader("Access-Control-Allow-Headers","x-requested-with,content-Type");
         chain.doFilter(httprequest,httpresponse);
     }
 
