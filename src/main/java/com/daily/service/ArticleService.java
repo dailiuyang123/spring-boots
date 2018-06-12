@@ -5,6 +5,12 @@ import com.daily.mybatis.dao.ArticleTagMapper;
 import com.daily.mybatis.dao.TagMapper;
 import com.daily.mybatis.entity.*;
 import com.daily.utils.IdGenUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Attribute;
+import org.jsoup.nodes.Attributes;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,9 +42,13 @@ public class ArticleService {
        articleWithBLOBs.setArticelContent(param.get("content").toString());
        articleWithBLOBs.setPublishTime(new Date());
        articleWithBLOBs.setArticleId(IdGenUtils.UUID());
+       //Html 文件处理
+       String src = getImageUrl(param.get("content").toString());
+       articleWithBLOBs.setTitle_pictrues(src);
        //标签 处理
        if (!StringUtils.isEmpty(param.get("tag"))){
            TagExample tagExample=new TagExample();
+
            TagExample.Criteria criteria = tagExample.createCriteria();
            criteria.andNameEqualTo(param.get("tag").toString());
            List<Tag> tags = tagMapper.selectByExample(tagExample);
@@ -63,6 +73,7 @@ public class ArticleService {
    public Map selectArticles(Map param){
 
        ArticleExample articleExample=new ArticleExample();
+       articleExample.setOrderByClause("orderByClause DESC");
        ArticleExample.Criteria criteria = articleExample.createCriteria();
        if(!StringUtils.isEmpty(param.get("userId"))){
             criteria.andUserIdEqualTo(param.get("userId").toString());
@@ -99,6 +110,36 @@ public class ArticleService {
            articleMapper.deleteByPrimaryKey(id);
        }
    }
+
+
+   /**
+   *
+   * 作者  json
+   * 时间  2018/6/12 16:12
+   * 描述  对Html文本处理获取 image 元素
+   *
+   **/
+   public static String getImageUrl(String content){
+       //将 string 转化为 jsoup 的Document对象
+       Document document = Jsoup.parse(content);
+       Elements imgs = document.getElementsByTag("img");
+       String src="";
+       if (imgs.size()>0){
+           Element element = imgs.get(0);
+           Attributes attributes = element.attributes();
+           for (Attribute attribute : attributes) {
+               String key = attribute.getKey();
+               if (key.equals("src")){
+                   String value = attribute.getValue();
+                   System.out.println("src:"+value);
+                   src=value;
+                   break;
+               }
+           }
+       }
+       return src;
+   }
+
 
 
 
