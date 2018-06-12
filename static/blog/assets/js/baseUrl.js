@@ -1,6 +1,7 @@
-var url="http://localhost:8686";
-var getTalksUrl="http://localhost:8686/Talk/helloword";
-var  createArticle="http://localhost:8686/article/createArticle";
-var getArticles="http://localhost:8686/article/getArticles";
-var getArticleDetail="http://localhost:8686/article/articleDetail";
-var getPersonInfo="http://localhost:8686/rest/person";
+var url="http://172.16.2.234:8686";
+var getTalksUrl="http://172.16.2.234:8686/Talk/helloword";
+var  createArticle="http://172.16.2.234:8686/article/createArticle";
+var getArticles="http://172.16.2.234:8686/article/getArticles";
+var getArticleDetail="http://172.16.2.234:8686/article/articleDetail";
+var getPersonInfo="http://172.16.2.234:8686/rest/person";
+var deleteArticle="http://172.16.2.234:8686/article/deleteArticle";

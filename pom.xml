@@ -5,7 +5,7 @@
 
 	<groupId>com.daily</groupId>
 	<artifactId>spring-boots</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>spring-boots</name>
@@ -118,17 +118,32 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!--AOP 切点-->
-		<!--<dependency>-->
-			<!--<groupId>org.aspectj</groupId>-->
-			<!--<artifactId>aspectjrt</artifactId>-->
-			<!--<version>1.8.9</version>-->
-		<!--</dependency>-->
+
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
 			<version>2.9.0</version>
 		</dependency>
+		<!---->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.7</version>
+            <scope>test</scope>
+        </dependency>
+		<dependency>
+			<groupId>fr.opensagres.xdocreport</groupId>
+			<artifactId>org.apache.poi.xwpf.converter.xhtml</artifactId>
+			<version>1.0.6</version>
+		</dependency>
+		<!--fastDFS 集成-->
+		<!-- https://mvnrepository.com/artifact/net.oschina.zcx7878/fastdfs-client-java -->
+		<dependency>
+			<groupId>net.oschina.zcx7878</groupId>
+			<artifactId>fastdfs-client-java</artifactId>
+			<version>1.27.0.0</version>
+		</dependency>
+
 
 	</dependencies>
 

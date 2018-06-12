@@ -24,7 +24,7 @@ public class TagController {
     public JsonMessage tagList(HttpServletRequest request, HttpServletResponse response){
         JsonMessage jsonMessage=new JsonMessage();
         try {
-            
+
 
         }catch (Exception e){
             logger.error(e.getMessage());

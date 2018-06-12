@@ -99,4 +99,24 @@ public class ArticleController {
     }
 
 
+    /**
+    *
+    * 作者  json
+    * 时间  2018/6/12 14:20
+    * 描述 删除博客
+    *
+    **/
+    @RequestMapping(value = "/deleteArticle",method = RequestMethod.POST)
+    public JsonMessage deleteArticle(HttpServletRequest request,HttpServletResponse response){
+        JsonMessage jsonMessage=new JsonMessage();
+        Map param = ParamUtils.getParam(request);
+        try {
+            articleService.deleteArticle(param);
+        }catch (Exception e){
+            jsonMessage.setErrorCode("998");
+            jsonMessage.setErrorMessage("内部错误");
+        }
+        return jsonMessage;
+    }
+
 }

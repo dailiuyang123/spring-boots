@@ -55,7 +55,6 @@ public class ArticleService {
            }
        }
 
-
     articleMapper.insertSelective(articleWithBLOBs);
 
    }
@@ -84,6 +83,21 @@ public class ArticleService {
            result.put("data",articleWithBLOBs);
        }
        return result;
+   }
+
+
+   /**
+   *
+   * 作者  json
+   * 时间  2018/6/12 14:27
+   * 描述 删除 文章
+   *
+   **/
+   public void deleteArticle(Map param){
+       if (param.containsKey("id")){
+           String id = param.get("id").toString();
+           articleMapper.deleteByPrimaryKey(id);
+       }
    }
 
 

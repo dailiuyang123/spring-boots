@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>轮播图管理</title>
+		<style>
+			body,
+			table {
+				font-size: 12px;
+			}
+			
+			table {
+				table-layout: fixed;
+				empty-cells: show;
+				border-collapse: collapse;
+				margin: 0 auto;
+			}
+			
+			td {
+				height: 20px;
+			}
+			h1{
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>轮播图管理</h1>
+		<table id="tab">
+			<tr>
+				<th>ID</th>
+				<th>文章标题</th>
+				<th>创建时间</th>
+				<th>操作</th>
+			</tr>
+		
+		</table>
+
+	</body>
+	<script src="js/jquery.min.js"></script>
+	<script src="../blog/assets/js/baseUrl.js"></script>
+	<script>
+		var articleListURL = getArticles;
+		console.log(articleListURL);
+		$.ajax({
+			type: "post",
+			url: articleListURL,
+			async: true,
+			success: function(result) {
+				var ele="<tr>";
+				var data = result.data.data;
+				for(j = 0; j < data.length; j++) {
+					console.log(data[j]);
+					var elment=data[j];
+					ele=ele+"<td>"+elment.articleId+"</td>";
+					ele=ele+"<td>"+elment.articelTitle+"</td>";
+					ele=ele+"<td>"+elment.publishTime+"</td>";
+					var id=elment.articleId;
+					ele=ele+"<td>"+"<button onclick=lisen(this,'"+id+"')>删除</button>"+"</td>";
+					
+					$("#tab").append(ele+"</tr>");
+					ele="<tr>";
+				}
+				console.log(data);
+			},
+			error: function() {
+				
+			}
+		});
+		
+		//监听事件
+		function lisen(obj,vals){
+			window.alert("监听触发");
+			console.log(obj);
+			console.log(vals);
+			deletelist(vals);
+		}
+		
+		//删除文章方法
+		function deletelist(id){
+			var deleurl=deleteArticle;
+			$.ajax({
+				type:"post",
+				url:deleurl,
+				async:true,
+				data:{"id":id},
+				success:function(result){
+					window.alert("刪除成功");
+					location.reload();
+				},
+				error:function(){
+					console.log("刪除失敗");
+				}
+			});
+			
+		}
+		
+	</script>
+
+</html>
