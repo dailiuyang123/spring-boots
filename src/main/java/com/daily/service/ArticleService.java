@@ -45,6 +45,10 @@ public class ArticleService {
        //Html 文件处理
        String src = getImageUrl(param.get("content").toString());
        articleWithBLOBs.setTitle_pictrues(src);
+       String content = Jsoup.parse(param.get("content").toString()).text();
+       String substring = content.substring(0,100);
+       //文章简述
+       articleWithBLOBs.setTitle_mini(substring);
        //标签 处理
        if (!StringUtils.isEmpty(param.get("tag"))){
            TagExample tagExample=new TagExample();
@@ -73,7 +77,7 @@ public class ArticleService {
    public Map selectArticles(Map param){
 
        ArticleExample articleExample=new ArticleExample();
-       articleExample.setOrderByClause("orderByClause DESC");
+       articleExample.setOrderByClause("publishTime DESC");
        ArticleExample.Criteria criteria = articleExample.createCriteria();
        if(!StringUtils.isEmpty(param.get("userId"))){
             criteria.andUserIdEqualTo(param.get("userId").toString());
