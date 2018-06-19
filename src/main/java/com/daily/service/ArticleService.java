@@ -5,6 +5,7 @@ import com.daily.mybatis.dao.ArticleTagMapper;
 import com.daily.mybatis.dao.TagMapper;
 import com.daily.mybatis.entity.*;
 import com.daily.utils.IdGenUtils;
+import com.daily.utils.PageHelp;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Attributes;
@@ -74,7 +75,7 @@ public class ArticleService {
    }
 
 
-   public Map selectArticles(Map param){
+   public Map selectArticles(Map param) throws Exception {
 
        ArticleExample articleExample=new ArticleExample();
        articleExample.setOrderByClause("publishTime DESC");
@@ -83,8 +84,19 @@ public class ArticleService {
             criteria.andUserIdEqualTo(param.get("userId").toString());
        }
        List<ArticleWithBLOBs> articles = articleMapper.selectByExampleWithBLOBs(articleExample);
+       Integer page = param.containsKey("page") == true ? Integer.parseInt(param.get("page").toString()) : 1;
+       Integer start = PageHelp.getStart(page, 10);
+       int total=articles.size();
+       List<ArticleWithBLOBs> articleWithBLOBs=null;
+       if (total<10){
+            articleWithBLOBs = articles.subList(start-1, total);
+       }else {
+            articleWithBLOBs = articles.subList(start-1, page * 10-1);
+       }
+
        Map result=new HashMap();
-       result.put("data",articles);
+       result.put("data",articleWithBLOBs);
+       result.put("total",PageHelp.getTotal(total,10));
        return result;
    }
 
