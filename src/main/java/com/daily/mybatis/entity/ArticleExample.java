@@ -395,6 +395,76 @@ public class ArticleExample {
             return (Criteria) this;
         }
 
+        public Criteria andArticelTitleIsNull() {
+            addCriterion("articelTitle is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticelTitleIsNotNull() {
+            addCriterion("articelTitle is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticelTitleEqualTo(String value) {
+            addCriterion("articelTitle =", value, "articelTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticelTitleNotEqualTo(String value) {
+            addCriterion("articelTitle <>", value, "articelTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticelTitleGreaterThan(String value) {
+            addCriterion("articelTitle >", value, "articelTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticelTitleGreaterThanOrEqualTo(String value) {
+            addCriterion("articelTitle >=", value, "articelTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticelTitleLessThan(String value) {
+            addCriterion("articelTitle <", value, "articelTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticelTitleLessThanOrEqualTo(String value) {
+            addCriterion("articelTitle <=", value, "articelTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticelTitleLike(String value) {
+            addCriterion("articelTitle like", value, "articelTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticelTitleNotLike(String value) {
+            addCriterion("articelTitle not like", value, "articelTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticelTitleIn(List<String> values) {
+            addCriterion("articelTitle in", values, "articelTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticelTitleNotIn(List<String> values) {
+            addCriterion("articelTitle not in", values, "articelTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticelTitleBetween(String value1, String value2) {
+            addCriterion("articelTitle between", value1, value2, "articelTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticelTitleNotBetween(String value1, String value2) {
+            addCriterion("articelTitle not between", value1, value2, "articelTitle");
+            return (Criteria) this;
+        }
+
         public Criteria andCategoryIdIsNull() {
             addCriterion("categoryId is null");
             return (Criteria) this;
@@ -465,143 +535,73 @@ public class ArticleExample {
             return (Criteria) this;
         }
 
-        public Criteria andTitle_pictruesIsNull() {
-            addCriterion("title_pictrues is null");
+        public Criteria andTypeIsNull() {
+            addCriterion("type is null");
             return (Criteria) this;
         }
 
-        public Criteria andTitle_pictruesIsNotNull() {
-            addCriterion("title_pictrues is not null");
+        public Criteria andTypeIsNotNull() {
+            addCriterion("type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTitle_pictruesEqualTo(String value) {
-            addCriterion("title_pictrues =", value, "title_pictrues");
+        public Criteria andTypeEqualTo(String value) {
+            addCriterion("type =", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTitle_pictruesNotEqualTo(String value) {
-            addCriterion("title_pictrues <>", value, "title_pictrues");
+        public Criteria andTypeNotEqualTo(String value) {
+            addCriterion("type <>", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTitle_pictruesGreaterThan(String value) {
-            addCriterion("title_pictrues >", value, "title_pictrues");
+        public Criteria andTypeGreaterThan(String value) {
+            addCriterion("type >", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTitle_pictruesGreaterThanOrEqualTo(String value) {
-            addCriterion("title_pictrues >=", value, "title_pictrues");
+        public Criteria andTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("type >=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTitle_pictruesLessThan(String value) {
-            addCriterion("title_pictrues <", value, "title_pictrues");
+        public Criteria andTypeLessThan(String value) {
+            addCriterion("type <", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTitle_pictruesLessThanOrEqualTo(String value) {
-            addCriterion("title_pictrues <=", value, "title_pictrues");
+        public Criteria andTypeLessThanOrEqualTo(String value) {
+            addCriterion("type <=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTitle_pictruesLike(String value) {
-            addCriterion("title_pictrues like", value, "title_pictrues");
+        public Criteria andTypeLike(String value) {
+            addCriterion("type like", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTitle_pictruesNotLike(String value) {
-            addCriterion("title_pictrues not like", value, "title_pictrues");
+        public Criteria andTypeNotLike(String value) {
+            addCriterion("type not like", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTitle_pictruesIn(List<String> values) {
-            addCriterion("title_pictrues in", values, "title_pictrues");
+        public Criteria andTypeIn(List<String> values) {
+            addCriterion("type in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTitle_pictruesNotIn(List<String> values) {
-            addCriterion("title_pictrues not in", values, "title_pictrues");
+        public Criteria andTypeNotIn(List<String> values) {
+            addCriterion("type not in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTitle_pictruesBetween(String value1, String value2) {
-            addCriterion("title_pictrues between", value1, value2, "title_pictrues");
+        public Criteria andTypeBetween(String value1, String value2) {
+            addCriterion("type between", value1, value2, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTitle_pictruesNotBetween(String value1, String value2) {
-            addCriterion("title_pictrues not between", value1, value2, "title_pictrues");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitle_miniIsNull() {
-            addCriterion("title_mini is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitle_miniIsNotNull() {
-            addCriterion("title_mini is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitle_miniEqualTo(String value) {
-            addCriterion("title_mini =", value, "title_mini");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitle_miniNotEqualTo(String value) {
-            addCriterion("title_mini <>", value, "title_mini");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitle_miniGreaterThan(String value) {
-            addCriterion("title_mini >", value, "title_mini");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitle_miniGreaterThanOrEqualTo(String value) {
-            addCriterion("title_mini >=", value, "title_mini");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitle_miniLessThan(String value) {
-            addCriterion("title_mini <", value, "title_mini");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitle_miniLessThanOrEqualTo(String value) {
-            addCriterion("title_mini <=", value, "title_mini");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitle_miniLike(String value) {
-            addCriterion("title_mini like", value, "title_mini");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitle_miniNotLike(String value) {
-            addCriterion("title_mini not like", value, "title_mini");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitle_miniIn(List<String> values) {
-            addCriterion("title_mini in", values, "title_mini");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitle_miniNotIn(List<String> values) {
-            addCriterion("title_mini not in", values, "title_mini");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitle_miniBetween(String value1, String value2) {
-            addCriterion("title_mini between", value1, value2, "title_mini");
-            return (Criteria) this;
-        }
-
-        public Criteria andTitle_miniNotBetween(String value1, String value2) {
-            addCriterion("title_mini not between", value1, value2, "title_mini");
+        public Criteria andTypeNotBetween(String value1, String value2) {
+            addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
     }

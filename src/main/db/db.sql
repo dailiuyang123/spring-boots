@@ -1,15 +1,17 @@
 -- 博客表
 CREATE TABLE `t_article` (
-  `articleId` varchar(100) NOT NULL,
+  `articleId` varchar(100) NOT NULL COMMENT '博客主键',
   `publishTime` datetime DEFAULT NULL COMMENT '创建日期',
   `userId` varchar(100) DEFAULT NULL,
-  `title_pictrues` text,
-  `title_mini` text,
-  `articelTitle` varchar(200) DEFAULT NULL,
+  `title_pictrues` text COMMENT '标题图片',
+  `title_mini` text COMMENT '文章简介',
+  `articelTitle` varchar(200) DEFAULT NULL COMMENT '文章标题',
   `articelContent` text COMMENT '文章内容',
-  `categoryId` varchar(100) DEFAULT NULL,
+  `categoryId` varchar(100) DEFAULT NULL COMMENT '关联标签id',
+  `type` varchar(5) DEFAULT NULL COMMENT '文章类型/暂定 1是轮播图文章',
   PRIMARY KEY (`articleId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='博客表';
+
 
 -- 标签表
 CREATE TABLE `t_tag` (
