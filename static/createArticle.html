@@ -48,8 +48,14 @@
     <br>
     <button class="btn-add-tag" id="addTag" onclick="clicks()">添加标签</button>
     <div id="tag"></div>
+    
     <br>
     <br>
+    <input type="checkbox" onclick="check()" id="Header"/>是否选中为轮播图文章
+    <br>
+    <br>
+    
+    
     <button id="btn2">保存</button>
 </div>
 <script type="text/javascript">
@@ -57,6 +63,19 @@
         document.getElementById("tag").innerHTML = "<input type='text' id='tagvalue' />";
     }
 
+</script>
+
+<script type="text/javascript">
+	//获取是否是轮播图标记
+		function check(){
+			
+			var che1=  document.getElementById("Header").checked
+			if(che1){
+				che1="1";
+			}
+			console.log(che1);
+		}
+	
 </script>
 
 <script type="text/javascript">
@@ -121,6 +140,15 @@
         //保存數據
         var tilte = document.getElementById("title").value;
 
+		//是否选中
+		var che=  document.getElementById("Header").checked
+			if(che){
+				che="1";
+			}else{
+				che=null;
+			}
+			console.log(che);
+			
         var tag = document.getElementById("tagvalue");
         if (tag != null) {
             window.alert("有值哦");
@@ -141,7 +169,8 @@
             data: {
                 "title": tilte,
                 "content": content,
-                "tag": tag
+                "tag": tag,
+                "type":che
             },
             success: function (result) {
                 if (result == "内部错误") {

@@ -49,10 +49,18 @@
 		</nav>
 		<hr>
 		<!-- nav end -->
+		<script type="text/javascript">
+			//$(window).load() 方法 //加载顺序是等所有页面 元素加载过后再执行。。。
+			$(window).load(function(){
+				
+				
+			});
+			
+		</script>
 		<!-- banner start  轮播图-->
 		<div class="am-g am-g-fixed blog-fixed am-u-sm-centered blog-article-margin">
 			<div data-am-widget="slider" class="am-slider am-slider-b1" data-am-slider='{&quot;controlNav&quot;:false}'>
-				<ul class="am-slides">
+				<ul class="am-slides" id="headerPictrue">
 					<li>
 						<img src="assets/i/b1.jpg">
 						<div class="blog-slider-desc am-slider-desc ">

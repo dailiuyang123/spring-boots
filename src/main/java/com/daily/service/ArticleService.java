@@ -47,9 +47,17 @@ public class ArticleService {
        String src = getImageUrl(param.get("content").toString());
        articleWithBLOBs.setTitle_pictrues(src);
        String content = Jsoup.parse(param.get("content").toString()).text();
-       String substring = content.substring(0,100);
+       String substring="";
+       if (content.length()<100){
+           substring=content;
+       }else {
+           substring= content.substring(0,99);
+       }
+
        //文章简述
        articleWithBLOBs.setTitle_mini(substring);
+       //是否是轮播图
+       articleWithBLOBs.setType(param.get("type")==null?null:param.get("type").toString());
        //标签 处理
        if (!StringUtils.isEmpty(param.get("tag"))){
            TagExample tagExample=new TagExample();
