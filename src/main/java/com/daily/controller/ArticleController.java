@@ -17,30 +17,28 @@ import java.util.Map;
 
 /**
  * Created by Azir on 2018/5/27.
- *  文章管理
+ * 文章管理
  */
 @RestController
 @RequestMapping("/article")
 public class ArticleController {
 
-    private Logger logger=LoggerFactory.getLogger(ArticleController.class);
+    private Logger logger = LoggerFactory.getLogger(ArticleController.class);
 
     @Autowired
     private ArticleService articleService;
 
     /**
-    *
-    * 作者  json
-    * 时间  2018/6/7 17:20
-    * 描述 新建博客
-    *
-    **/
-    @RequestMapping(value = "/createArticle",method = RequestMethod.POST)
-    public String createArticle(HttpServletRequest request, HttpServletResponse response){
+     * 作者  json
+     * 时间  2018/6/7 17:20
+     * 描述 新建博客
+     **/
+    @RequestMapping(value = "/createArticle", method = RequestMethod.POST)
+    public String createArticle(HttpServletRequest request, HttpServletResponse response) {
         Map param = ParamUtils.getParam(request);
         try {
             articleService.createArticle(param);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error(e.toString());
             e.printStackTrace();
             return "内部错误";
@@ -50,21 +48,24 @@ public class ArticleController {
 
 
     /**
-    *
-    * 作者  json
-    * 时间  2018/5/28 10:44
-    * 描述 获取博客列表
-    *
-    **/
-    @RequestMapping(value = "/getArticles",method = RequestMethod.POST)
-    public JsonMessage getArticles(HttpServletRequest request,HttpServletResponse response){
+     * 作者  json
+     * 时间  2018/5/28 10:44
+     * 描述 获取博客列表/轮播图
+     **/
+    @RequestMapping(value = "/getArticles", method = RequestMethod.POST)
+    public JsonMessage getArticles(HttpServletRequest request, HttpServletResponse response) {
         Map param = ParamUtils.getParam(request);
-        JsonMessage jsonMessage=new JsonMessage();
+        JsonMessage jsonMessage = new JsonMessage();
         try {
-            Map map = articleService.selectArticles(param);
+            Map map;
+            if (param.containsKey("type")) {
+                map = articleService.selectTopArticle(param);
+            } else {
+                map = articleService.selectArticles(param);
+            }
             jsonMessage.setErrorCode("0");
             jsonMessage.setData(map);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error(e.getMessage());
             e.printStackTrace();
             jsonMessage.setErrorCode("500");
@@ -75,21 +76,19 @@ public class ArticleController {
 
 
     /**
-    *
-    * 作者  json
-    * 时间  2018/5/28 11:32
-    * 描述  获取 博客详情
-    *
-    **/
-    @RequestMapping(value = "/articleDetail",method = RequestMethod.POST)
-    public JsonMessage articleDetail(HttpServletRequest request,HttpServletResponse response){
+     * 作者  json
+     * 时间  2018/5/28 11:32
+     * 描述  获取 博客详情
+     **/
+    @RequestMapping(value = "/articleDetail", method = RequestMethod.POST)
+    public JsonMessage articleDetail(HttpServletRequest request, HttpServletResponse response) {
         Map param = ParamUtils.getParam(request);
-        JsonMessage jsonMessage=new JsonMessage();
+        JsonMessage jsonMessage = new JsonMessage();
         try {
             Map map = articleService.selectArticleById(param);
             jsonMessage.setErrorCode("0");
             jsonMessage.setData(map);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error(e.getMessage());
             e.printStackTrace();
             jsonMessage.setErrorMessage("内部错误");
@@ -100,19 +99,17 @@ public class ArticleController {
 
 
     /**
-    *
-    * 作者  json
-    * 时间  2018/6/12 14:20
-    * 描述 删除博客
-    *
-    **/
-    @RequestMapping(value = "/deleteArticle",method = RequestMethod.POST)
-    public JsonMessage deleteArticle(HttpServletRequest request,HttpServletResponse response){
-        JsonMessage jsonMessage=new JsonMessage();
+     * 作者  json
+     * 时间  2018/6/12 14:20
+     * 描述 删除博客
+     **/
+    @RequestMapping(value = "/deleteArticle", method = RequestMethod.POST)
+    public JsonMessage deleteArticle(HttpServletRequest request, HttpServletResponse response) {
+        JsonMessage jsonMessage = new JsonMessage();
         Map param = ParamUtils.getParam(request);
         try {
             articleService.deleteArticle(param);
-        }catch (Exception e){
+        } catch (Exception e) {
             jsonMessage.setErrorCode("998");
             jsonMessage.setErrorMessage("内部错误");
         }

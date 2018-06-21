@@ -52,7 +52,37 @@
 		<script type="text/javascript">
 			//$(window).load() 方法 //加载顺序是等所有页面 元素加载过后再执行。。。
 			$(window).load(function(){
-				
+				$.ajax({
+					type:"post",
+					url:getArticles,
+					async:true,
+					data:{"type":"1"},
+					success:function(result){
+						var data=result.data.data;
+						//遍历追加
+						for (i=0;i<data.length;i++) {
+							var title=data[i].articelTitle;
+							var minicontent=data[i].title_mini;
+							//时间
+							var createTime=data[i].publishTime;
+							var datesdf=new Date(createTime);
+							var localdate= datesdf.toLocaleString();
+							//图片
+							var pic= data[i].title_pictrues;
+							//判定是否有图片
+							if(pic==null||pic==""||pic==undefined){
+									    //图片暂无 404！
+										console.log(staticURL404);
+										pic=staticURL404;
+							}
+							//准备添加
+							$("#headerPictrue").append("<li><img src='"+pic+"'><div class='blog-slider-desc am-slider-desc'><div class='blog-text-center blog-slider-con'><span><a href='article.html' class='blog-color'>Article &nbsp;</a></span><h1 class='blog-h-margin'><a href='article.html?id="+data[i].articleId+"'>"+title+"</a></h1><p>"+minicontent+"</p><span class='blog-bor'>"+localdate+"</span><br><br><br><br><br><br></div></div></li>");
+						}
+					},
+					error:function(){
+						window.alert("请求失败");
+					}
+				});
 				
 			});
 			
@@ -67,49 +97,13 @@
 							<div class="blog-text-center blog-slider-con">
 								<span><a href="article.html" class="blog-color">Article &nbsp;</a></span>
 								<h1 class="blog-h-margin"><a href="article.html">this is one page</a></h1>
-								<p>那时候刚好下着雨，柏油路面湿冷冷的，还闪烁着青、黄、红颜色的灯火。
-								</p>
+								<p>那时候刚好下着雨，柏油路面湿冷冷的，还闪烁着青、黄、红颜色的灯火。</p>
 								<span class="blog-bor">2015/10/9</span>
-								<br><br><br><br><br><br><br>
+								<br><br><br><br><br><br>
 							</div>
 						</div>
 					</li>
-					<li>
-						<img src="assets/i/b2.jpg">
-						<div class="am-slider-desc blog-slider-desc">
-							<div class="blog-text-center blog-slider-con">
-								<span><a href="article.html" class="blog-color">Article &nbsp;</a></span>
-								<h1 class="blog-h-margin"><a href="article.html">this is two page</a></h1>
-								<p>那时候刚好下着雨，柏油路面湿冷冷的，还闪烁着青、黄、红颜色的灯火。
-								</p>
-								<span>2015/10/9</span>
-							</div>
-						</div>
-					</li>
-					<li>
-						<img src="assets/i/b3.jpg">
-						<div class="am-slider-desc blog-slider-desc">
-							<div class="blog-text-center blog-slider-con">
-								<span><a href="article.html" class="blog-color">Article &nbsp;</a></span>
-								<h1 class="blog-h-margin"><a href="article.html">this is three page</a></h1>
-								<p>那时候刚好下着雨，柏油路面湿冷冷的，还闪烁着青、黄、红颜色的灯火。
-								</p>
-								<span>2015/10/9</span>
-							</div>
-						</div>
-					</li>
-					<li>
-						<img src="assets/i/b2.jpg">
-						<div class="am-slider-desc blog-slider-desc">
-							<div class="blog-text-center blog-slider-con">
-								<span><a href="article.html" class="blog-color">Article &nbsp;</a></span>
-								<h1 class="blog-h-margin"><a href="article.html">this is four page</a></h1>
-								<p>那时候刚好下着雨，柏油路面湿冷冷的，还闪烁着青、黄、红颜色的灯火。
-								</p>
-								<span>2015/10/9</span>
-							</div>
-						</div>
-					</li>
+					
 				</ul>
 			</div>
 		</div>

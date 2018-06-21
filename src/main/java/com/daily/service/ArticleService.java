@@ -91,6 +91,8 @@ public class ArticleService {
        if(!StringUtils.isEmpty(param.get("userId"))){
             criteria.andUserIdEqualTo(param.get("userId").toString());
        }
+       //查询文章列表-不包含轮播图文章类型。
+       criteria.andTypeIsNull();
        List<ArticleWithBLOBs> articles = articleMapper.selectByExampleWithBLOBs(articleExample);
        Integer page = param.containsKey("page") == true ? Integer.parseInt(param.get("page").toString()) : 1;
        Integer start = PageHelp.getStart(page, 10);
@@ -107,6 +109,25 @@ public class ArticleService {
        result.put("total",PageHelp.getTotal(total,10));
        return result;
    }
+
+   /**
+   *
+   * 作者  json
+   * 时间  2018/6/21 14:49
+   * 描述 查询轮播图文章
+   *
+   **/
+   public Map selectTopArticle(Map param){
+       ArticleExample articleExample=new ArticleExample();
+       ArticleExample.Criteria criteria = articleExample.createCriteria();
+       criteria.andTypeEqualTo("1");
+       List<Article> articles = articleMapper.selectByExample(articleExample);
+       Map result=new HashMap();
+       result.put("data",articles);
+       return result;
+   }
+
+
 
    public Map selectArticleById(Map param) throws Exception {
        Map result=new HashMap();
