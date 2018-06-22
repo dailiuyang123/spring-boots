@@ -29,6 +29,28 @@
 			console.log("hello");
 			console.log(url);
 		</script>
+		<style>
+			/*loading ...遮罩层css样式 */
+			#loading {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.7);
+				z-index: 15000;
+			}
+			
+			#loading img {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 80px;
+				height: 80px;
+				margin-top: -15px;
+				margin-left: -15px;
+			}
+		</style>
 	</head>
 
 	<body id="blog">
@@ -51,47 +73,71 @@
 		<!-- nav end -->
 		<script type="text/javascript">
 			//$(window).load() 方法 //加载顺序是等所有页面 元素加载过后再执行。。。
-			$(window).load(function(){
+			$(window).load(function() {
+				//loading
+				$('#loading').hide();
 				$.ajax({
-					type:"post",
-					url:getArticles,
-					async:true,
-					data:{"type":"1"},
-					success:function(result){
-						var data=result.data.data;
+					type: "post",
+					url: getArticles,
+					async: true,
+					data: {
+						"type": "1"
+					},
+					success: function(result) {
+						var data = result.data.data;
+						console.log(data);
 						//遍历追加
-						for (i=0;i<data.length;i++) {
-							var title=data[i].articelTitle;
-							var minicontent=data[i].title_mini;
+						for(i = 0; i < data.length; i++) {
+							var title = data[i].articelTitle;
+							var minicontent = data[i].title_mini;
 							//时间
-							var createTime=data[i].publishTime;
-							var datesdf=new Date(createTime);
-							var localdate= datesdf.toLocaleString();
+							var createTime = data[i].publishTime;
+							var datesdf = new Date(createTime);
+							var localdate = datesdf.toLocaleString();
 							//图片
-							var pic= data[i].title_pictrues;
+							var pic = data[i].title_pictrues;
 							//判定是否有图片
-							if(pic==null||pic==""||pic==undefined){
-									    //图片暂无 404！
-										console.log(staticURL404);
-										pic=staticURL404;
+							if(pic == null || pic == "" || pic == undefined) {
+								//图片暂无 404！
+								console.log(staticURL404);
+								pic = staticURL404;
 							}
 							//准备添加
-							$("#headerPictrue").append("<li><img src='"+pic+"'><div class='blog-slider-desc am-slider-desc'><div class='blog-text-center blog-slider-con'><span><a href='article.html' class='blog-color'>Article &nbsp;</a></span><h1 class='blog-h-margin'><a href='article.html?id="+data[i].articleId+"'>"+title+"</a></h1><p>"+minicontent+"</p><span class='blog-bor'>"+localdate+"</span><br><br><br><br><br><br></div></div></li>");
+							console.log(pic);
+							//$("#headerPictrue").append("<li><img src='"+pic+"'><div class='blog-slider-desc am-slider-desc'><div class='blog-text-center blog-slider-con'><span><a href='article.html' class='blog-color'>Article &nbsp;</a></span><h1 class='blog-h-margin'><a href='article.html?id="+data[i].articleId+"'>"+title+"</a></h1><p>"+minicontent+"</p><span class='blog-bor'>"+localdate+"</span><br><br><br><br><br><br></div></div></li>");
+							var h5 = "<li>";
+							h5 += "<img src='assets/i/b1.jpg'>";
+							h5 += "<div class='blog-slider-desc am-slider-desc '>";
+							h5 += "<div class='blog-text-center blog-slider-con'>";
+							h5 += "<span><a href='article.html' class='blog-color'>Article &nbsp;</a></span>";
+							h5 += "<h1 class='blog-h-margin'><a href='article.html'>this is 3 page</a></h1>";
+							h5 += "<p>收到虎II坦克 理论上的发放。</p>";
+							h5 += "<span class='blog-bor'>2015/10/9</span>";
+							h5 += "<br><br><br><br><br><br>";
+							h5 += "</div>";
+							h5 += "</div>";
+							h5 += "</li>";
+							console.log(h5);
+							document.getElementById("headerPictrue").innerHTML = h5;
+
+							$("#headerPictrue").append(h5);
+							//							$("#headerPictrue").append(h5);
+							//							$("#headerPictrue").append(h5);
+							console.log("轮播图已经追加完成")
 						}
 					},
-					error:function(){
+					error: function() {
 						window.alert("请求失败");
 					}
 				});
-				
+
 			});
-			
 		</script>
 		<!-- banner start  轮播图-->
 		<div class="am-g am-g-fixed blog-fixed am-u-sm-centered blog-article-margin">
 			<div data-am-widget="slider" class="am-slider am-slider-b1" data-am-slider='{&quot;controlNav&quot;:false}'>
 				<ul class="am-slides" id="headerPictrue">
-					<li>
+					<!--<li>
 						<img src="assets/i/b1.jpg">
 						<div class="blog-slider-desc am-slider-desc ">
 							<div class="blog-text-center blog-slider-con">
@@ -104,10 +150,27 @@
 						</div>
 					</li>
 					
+					
+					<li>
+						<img src='assets/i/b1.jpg'>
+						<div class='blog-slider-desc am-slider-desc '>
+							<div class='blog-text-center blog-slider-con'>
+								<span><a href='article.html' class='blog-color'>Article &nbsp;</a></span>
+								<h1 class='blog-h-margin'><a href='article.html'>this is two page</a></h1>
+								<p>孔梅花山。。。。。。</p>
+								<span class='blog-bor'>2015/10/9</span>
+								<br><br><br><br><br><br>
+							</div>
+						</div>
+					</li>-->
+
 				</ul>
 			</div>
 		</div>
 		<!-- banner end -->
+
+		<!--正在加载特效-->
+		<div id="loading" style="width: 100%;"></div>
 
 		<!-- content srart  文章列表-->
 		<div class="am-g am-g-fixed blog-fixed">
@@ -118,12 +181,14 @@
 						// TODO
 						//查询数据
 						$(window).load(function() {
-							var totalpage="";
+							var totalpage = "";
 							$.ajax({
 								type: "post",
 								url: getArticles,
 								async: true,
-								data: {"page":"1"},
+								data: {
+									"page": "1"
+								},
 								success: function(result) {
 									addEle(result);
 								},
@@ -135,27 +200,27 @@
 							function addEle(result) {
 								var data = result.data.data;
 								console.log(data);
-								window.test=5;
+								window.test = 5;
 								for(j = 0; j < data.length; j++) {
-									var pic= data[j].title_pictrues;
+									var pic = data[j].title_pictrues;
 									//循环追加
 									//判定是否有图片
-									if(pic==null||pic==""||pic==undefined){
-									    //图片暂无 404！
+									if(pic == null || pic == "" || pic == undefined) {
+										//图片暂无 404！
 										console.log(staticURL404);
-										pic=staticURL404;
+										pic = staticURL404;
 									}
 									//文章简介
-									var contentmini= data[j].title_mini;
-									if(contentmini==null){
-										contentmini="暂无简介信息"
+									var contentmini = data[j].title_mini;
+									if(contentmini == null) {
+										contentmini = "暂无简介信息"
 									}
 									//日期格式化
-									var cretime= data[j].publishTime;
-									var datesdf=new Date(cretime);
-									var localdate= datesdf.toLocaleString();
+									var cretime = data[j].publishTime;
+									var datesdf = new Date(cretime);
+									var localdate = datesdf.toLocaleString();
 									console.log(localdate);
-									$("#article").append("<article class='am-g blog-entry-article'> <div class='am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img'><img src='"+pic+"' alt='' class='am-u-sm-12'></div><div class='am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text'><span><a href='article.html' class='blog-color'>article &nbsp;</a></span><span> @QAQ &nbsp;</span><span>" + localdate + "</span><h1><a href='http://localhost:8686/blog/article.html?id="+data[j].articleId+"'>" + data[j].articelTitle + "</a></h1><p>"+contentmini +"</p><p><a href='' class='blog-continue'>continue reading</a></p></div></article>");
+									$("#article").append("<article class='am-g blog-entry-article'> <div class='am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img'><img src='" + pic + "' alt='' class='am-u-sm-12'></div><div class='am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text'><span><a href='article.html' class='blog-color'>article &nbsp;</a></span><span> @QAQ &nbsp;</span><span>" + localdate + "</span><h1><a href='http://localhost:8686/blog/article.html?id=" + data[j].articleId + "'>" + data[j].articelTitle + "</a></h1><p>" + contentmini + "</p><p><a href='' class='blog-continue'>continue reading</a></p></div></article>");
 
 								}
 
@@ -164,117 +229,148 @@
 					</script>
 
 					<!--<article class="am-g blog-entry-article">-->
-						<!--<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">-->
-							<!--<img src="assets/i/f19.jpg" alt="" class="am-u-sm-12">-->
-						<!--</div>-->
-						<!--<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">-->
-							<!--<span><a href="" class="blog-color">article&nbsp;</a></span>-->
-							<!--<span> @amazeUI &nbsp;</span>-->
-							<!--<span>2015/10/9</span>-->
-							<!--<h1><a href="">一想到你，我这张丑脸上就泛起微笑</a></h1>-->
-							<!--<p>那一天我二十一岁，在我一生的黄金时代。我有好多奢望。我想爱，想吃，还想在一瞬间变成天上半明半暗的云。-->
-							<!--</p>-->
-							<!--<p>-->
-								<!--<a href="" class="blog-continue">continue reading</a>-->
-							<!--</p>-->
-						<!--</div>-->
+					<!--<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">-->
+					<!--<img src="assets/i/f19.jpg" alt="" class="am-u-sm-12">-->
+					<!--</div>-->
+					<!--<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">-->
+					<!--<span><a href="" class="blog-color">article&nbsp;</a></span>-->
+					<!--<span> @amazeUI &nbsp;</span>-->
+					<!--<span>2015/10/9</span>-->
+					<!--<h1><a href="">一想到你，我这张丑脸上就泛起微笑</a></h1>-->
+					<!--<p>那一天我二十一岁，在我一生的黄金时代。我有好多奢望。我想爱，想吃，还想在一瞬间变成天上半明半暗的云。-->
+					<!--</p>-->
+					<!--<p>-->
+					<!--<a href="" class="blog-continue">continue reading</a>-->
+					<!--</p>-->
+					<!--</div>-->
 					<!--</article>-->
 				</div>
 				<!-- js 实现分页效果部分-->
 				<script type="text/javascript">
-					function perve(){
-						var page= $("#prev").attr("value");
+					function perve() {
+						var page = $("#prev").attr("value");
+						var page = parseInt(page) - 1;
 						console.log(page);
-						if(page<1){
+						//loading.....
+						var loadingurl = staticLoading;
+						if(page < 1) {
 							window.alert("前面没有啦");
-						}else{
+						} else {
 							$.ajax({
-								type:"post",
-								url:getArticles,
-								async:true,
-								data:{"page":page,
-									"size":"10"
+								type: "post",
+								url: getArticles,
+								async: true,
+								data: {
+									"page": page,
+									"size": "10"
+								},
+								//请求之前 
+								beforeSend: function(XMLHttpRequest) {
+									//alert('远程调用开始...');
+									$("#loading").append("<img src='" + loadingurl + "' />");
+									$('#loading').show();
 								},
 								success: function(result) {
+
+									//stop loading....
+
 									//清除老数据 
 									$("#article").empty(); //清除子元素
 									//追加新数据
 									addEle(result);
 									//页数加一
-                                    var page=parseInt($("#prev").attr("value"));
-									var newpage=page-1;
+									var page = parseInt($("#prev").attr("value"));
+									var newpage = page - 1;
 									console.log(newpage);
-									$("#prev").attr("value",newpage);
+									$("#prev").attr("value", newpage);
+								},
+								//加载完成
+								complete: function(XMLHttpRequest, textStatus) {
+									// alert('远程调用成功，状态文本值：'+textStatus);
+									$('#loading').hide();
 								},
 								error: function() {
 									window.alert("请求失败");
 								}
 							});
 						}
-						
+
 					}
-					
-					function next(){
-						var page= $("#prev").attr("value");
-						console.log(test);
-						if(page>test){
+
+					function next() {
+						var page = $("#prev").attr("value");
+						page = parseInt(page) + 1;
+						console.log(page);
+						//loading.....
+						var loadingurl = staticLoading;
+						if(page > test) {
 							window.alert("已经是最后一页啦");
-						}else {
-                            $.ajax({
-                                type: "post",
-                                url: getArticles,
-                                async: true,
-                                data: {
-                                    "page":page,
-                                    "size": "10"
-                                },
-                                success: function (result) {
-                                    //清除老数据
-                                    $("#article").empty(); //清除子元素
-                                    //追加新数据
-                                    addEle(result);
-                                    //页数加一
-                                    var page = parseInt($("#prev").attr("value"));
-                                    var newpage = page + 1;
-                                    console.log(newpage);
-                                    $("#prev").attr("value", newpage);
-                                },
-                                error: function () {
-                                    window.alert("请求失败");
-                                }
-                            });
+						} else {
+							$.ajax({
+								type: "post",
+								url: getArticles,
+								async: true,
+								data: {
+									"page": page,
+									"size": "10"
+								},
+								//请求之前 
+								beforeSend: function(XMLHttpRequest) {
+									//alert('远程调用开始...');
+									$("#loading").append("<img src='" + loadingurl + "' />");
+									$('#loading').show();
+								},
+								success: function(result) {
+									//清除老数据
+									$("#article").empty(); //清除子元素
+									//追加新数据
+									addEle(result);
+									//页数加一
+									var page = parseInt($("#prev").attr("value"));
+									var newpage = page + 1;
+									console.log(newpage);
+									$("#prev").attr("value", newpage);
+								},
+								//加载完成
+								complete: function(XMLHttpRequest, textStatus) {
+									// alert('远程调用成功，状态文本值：'+textStatus);
+									$('#loading').hide();
+								},
+								error: function() {
+									window.alert("请求失败");
+								}
+							});
 						}
 					}
 
-                    //元素追加
-                    function addEle(result) {
-                        var data = result.data.data;
-                        console.log(data);
+					//元素追加
+					function addEle(result) {
+						var data = result.data.data;
+						console.log(data);
 
-                        for (j = 0; j < data.length; j++) {
-                            var pic = data[j].title_pictrues;
-                            //循环追加
-                            //判定是否有图片
-                            if (pic == null || pic == "" || pic == undefined) {
-                                //图片暂无 404！
-                                console.log(staticURL404);
-                                pic = staticURL404;
-                            }
-                            //文章简介
-                            var contentmini = data[j].title_mini;
-                            if (contentmini == null) {
-                                contentmini = "暂无简介信息"
-                            }
-                            //日期格式化
-                            var cretime = data[j].publishTime;
-                            var datesdf = new Date(cretime);
-                            var localdate = datesdf.toLocaleString();
-                            console.log(localdate);
-                            $("#article").append("<article class='am-g blog-entry-article'> <div class='am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img'><img src='" + pic + "' alt='' class='am-u-sm-12'></div><div class='am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text'><span><a href='article.html' class='blog-color'>article &nbsp;</a></span><span> @QAQ &nbsp;</span><span>" + localdate + "</span><h1><a href='http://localhost:8686/blog/article.html?id=" + data[j].articleId + "'>" + data[j].articelTitle + "</a></h1><p>" + contentmini + "</p><p><a href='' class='blog-continue'>continue reading</a></p></div></article>");
+						for(j = 0; j < data.length; j++) {
+							var pic = data[j].title_pictrues;
+							//循环追加
+							//判定是否有图片
+							if(pic == null || pic == "" || pic == undefined) {
+								//图片暂无 404！
+								console.log(staticURL404);
+								pic = staticURL404;
+							}
+							//文章简介
+							var contentmini = data[j].title_mini;
+							if(contentmini == null) {
+								contentmini = "暂无简介信息"
+							}
+							//日期格式化
+							var cretime = data[j].publishTime;
+							var datesdf = new Date(cretime);
+							var localdate = datesdf.toLocaleString();
+							console.log(localdate);
+							$("#article").append("<article class='am-g blog-entry-article'> <div class='am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img'><img src='" + pic + "' alt='' class='am-u-sm-12'></div><div class='am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text'><span><a href='article.html' class='blog-color'>article &nbsp;</a></span><span> @QAQ &nbsp;</span><span>" + localdate + "</span><h1><a href='http://localhost:8686/blog/article.html?id=" + data[j].articleId + "'>" + data[j].articelTitle + "</a></h1><p>" + contentmini + "</p><p><a href='' class='blog-continue'>continue reading</a></p></div></article>");
 
-                        }
-                    }
-
+						}
+					}
 				</script>
 				<!--分页 按钮 -->
 				<ul class="am-pagination" id="page">
@@ -282,21 +378,18 @@
 						<button onclick="perve()" href="" value="1" id="prev">&laquo; Prev</button>
 					</li>
 					<li class="am-pagination-next">
-						<button onclick="next()" href=""  id="next">Next &raquo;</button>
+						<button onclick="next()" href="" id="next">Next &raquo;</button>
 					</li>
 				</ul>
-				
-				
-				
+
 			</div>
-			
 
 			<div class="am-u-md-4 am-u-sm-12 blog-sidebar" id="right">
-			<script type="text/javascript">
-                $("#right").load("common/right.html");
-                console.log("加载了右边栏 数据")
-			</script>
-		</div>
+				<script type="text/javascript">
+					$("#right").load("common/right.html");
+					console.log("加载了右边栏 数据")
+				</script>
+			</div>
 		</div>
 		<!-- content end -->
 

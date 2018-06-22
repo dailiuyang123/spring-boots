@@ -8,4 +8,5 @@ var getPersonInfo="http://172.16.2.234:8686/rest/person";
 var deleteArticle="http://172.16.2.234:8686/article/deleteArticle";
 
 //静态资源 URL 路径
+var staticLoading="http://localhost:8686/blog/images/exception/loading.gif";
 var staticURL404="http://localhost:8686/blog/images/exception/404.png";

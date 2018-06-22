@@ -6,6 +6,7 @@ import com.daily.mybatis.dao.TagMapper;
 import com.daily.mybatis.entity.*;
 import com.daily.utils.IdGenUtils;
 import com.daily.utils.PageHelp;
+import com.github.pagehelper.PageHelper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Attributes;
@@ -92,17 +93,17 @@ public class ArticleService {
             criteria.andUserIdEqualTo(param.get("userId").toString());
        }
        //查询文章列表-不包含轮播图文章类型。
-       criteria.andTypeIsNull();
+       criteria.andTypeNotEqualTo("1");
        List<ArticleWithBLOBs> articles = articleMapper.selectByExampleWithBLOBs(articleExample);
        Integer page = param.containsKey("page") == true ? Integer.parseInt(param.get("page").toString()) : 1;
        Integer start = PageHelp.getStart(page, 10);
        int total=articles.size();
        List<ArticleWithBLOBs> articleWithBLOBs=null;
-       if (total<10){
-            articleWithBLOBs = articles.subList(start-1, total);
-       }else {
-            articleWithBLOBs = articles.subList(start-1, page * 10-1);
-       }
+
+       //分页
+       PageHelper.startPage(page,10);
+       articleWithBLOBs = articleMapper.selectByExampleWithBLOBs(articleExample);
+
 
        Map result=new HashMap();
        result.put("data",articleWithBLOBs);
