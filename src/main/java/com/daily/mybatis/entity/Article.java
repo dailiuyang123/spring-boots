@@ -217,4 +217,16 @@ public class Article {
     public void setType(String type) {
         this.type = type == null ? null : type.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "articleId='" + articleId + '\'' +
+                ", publishTime=" + publishTime +
+                ", userId='" + userId + '\'' +
+                ", articelTitle='" + articelTitle + '\'' +
+                ", categoryId='" + categoryId + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

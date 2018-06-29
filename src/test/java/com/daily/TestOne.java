@@ -1,5 +1,6 @@
 package com.daily;
 
+import com.daily.service.ArticleService;
 import com.daily.utils.RemoteApiInvoke;
 import org.apache.poi.xwpf.converter.core.BasicURIResolver;
 import org.apache.poi.xwpf.converter.core.FileImageExtractor;
@@ -13,16 +14,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.*;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by json on 2018/5/16.
  * Describe:
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 public class TestOne {
 
-    @Test
+    //@Test
     public void  test() throws IOException {
 
         RemoteApiInvoke remoteApiInvoke=new RemoteApiInvoke();
@@ -39,7 +41,34 @@ public class TestOne {
     @Test
     public void testTree(){
 
-        
+//        //字符串
+//        String s;
+//        Set<String> dict;
+        String context = "哈哈哈哈】";
+        String[] splits = context.split("】");
+        if (splits.length == 1) { //不包含“】”
+            String conten = splits[0].toString();
+            String[] split = conten.split("【");
+            if (split.length==1){
+
+            }else {
+                String s = split[1].toString();
+                System.out.println(s);
+            }
+
+        } else {
+            String split = splits[0].toString();
+            System.out.println(split);
+            String[] split1 = split.split("【");
+            if (split1.length == 1) {
+                System.out.println(split1[0].toString());
+
+            } else {
+                System.out.println(split1[1].toString());
+
+            }
+        }
+
     }
 
     /**
@@ -49,7 +78,7 @@ public class TestOne {
     * 描述  Docx 转html
     *
     **/
-    @Test
+//    @Test
     public void testPDF(){
         String path= "D:\\163Music";
         String file = "D:\\163Music\\jdbcTemplet类型.docx";
