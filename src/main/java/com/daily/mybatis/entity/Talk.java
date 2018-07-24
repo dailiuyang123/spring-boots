@@ -83,6 +83,15 @@ public class Talk implements Serializable {
      * @mbggenerated
      */
     private Date createTime;
+    private Date updateTime;
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
 
     /**
      *

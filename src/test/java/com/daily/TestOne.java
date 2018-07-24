@@ -71,6 +71,19 @@ public class TestOne {
 
     }
 
+    @Test
+    public void testtwo(){
+        String[] aa={"aa","bb","cc"};
+        //
+        String a="";
+        for (String s : aa) {
+            a+=s+",";
+        }
+        String substring = a.substring(0, a.length() - 1);
+        System.out.println(substring);
+
+    }
+
     /**
     *
     * 作者  json

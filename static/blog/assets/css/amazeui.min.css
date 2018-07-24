@@ -8147,7 +8147,7 @@ ul.am-dropdown-content > .am-disabled > a:focus, ul.am-dropdown-content > .am-di
 }
 
 .am-slider .am-slides > li {
-    display: none;
+    /*display: none;*/
     -webkit-backface-visibility: hidden;
     position: relative
 }
