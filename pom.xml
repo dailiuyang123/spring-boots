@@ -175,6 +175,20 @@
 			<artifactId>commons-net</artifactId>
 			<version>3.5</version>
 		</dependency>
+		<!--HttpClient JAR-->
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.3</version>
+		</dependency>
+
+		<!--freemarker依赖-->
+		<dependency>
+			<groupId>freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.6</version>
+		</dependency>
 
 
 	</dependencies>
