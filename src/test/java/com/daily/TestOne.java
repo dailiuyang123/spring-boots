@@ -124,4 +124,12 @@ public class TestOne {
         }
 
     }
+
+
+    @Test
+    public void  testthreadlocal(){
+
+        StringFormat.getval();
+
+    }
 }
