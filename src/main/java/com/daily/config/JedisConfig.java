@@ -30,6 +30,9 @@ public class JedisConfig extends CachingConfigurerSupport {
     @Value("${spring.redis.timeout}")
     private int timeout;
 
+    @Value("${ftp.host}")
+    private String host1;
+
 //    @Value("${spring.redis.pool.max-idle}")
 //    private int maxIdle;
 
@@ -43,6 +46,7 @@ public class JedisConfig extends CachingConfigurerSupport {
     public JedisPool redisPoolFactory() {
         logger.info("JedisPool注入成功！！");
         logger.info("redis地址：" + host + ":" + port);
+        logger.error("ftp Host"+host1);
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
 
        // jedisPoolConfig.setMaxIdle(maxIdle);

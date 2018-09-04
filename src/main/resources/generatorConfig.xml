@@ -8,6 +8,9 @@
 	<classPathEntry location="E:\maven\mysql\mysql-connector-java\5.1.38\mysql-connector-java-5.1.38.jar"/>
 	<!--<context id="cvinfoTables" defaultModelType="flat" targetRuntime="MyBatis3Simple">-->
 	<context id="cvinfoTables" targetRuntime="MyBatis3">
+		<!--添加 反射 属性值-->
+		<plugin type="builder.field.FieldsPlugin" />
+
 		<commentGenerator>
 			<property name="suppressAllComments" value="false"/>
 			<property name="suppressDate" value="true"/>
@@ -41,7 +44,7 @@
                 比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate &ndash;&gt;
             &lt;!&ndash;<property name="useActualColumnNames" value="true"/>&ndash;&gt;
         </table>-->
-		<table tableName="t_article_tag" domainObjectName="ArticleTag">
+		<table tableName="t_article" domainObjectName="Article">
 			<property name="useActualColumnNames" value="true"/>
 		</table>
 	</context>

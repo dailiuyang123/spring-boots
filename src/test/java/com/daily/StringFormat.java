@@ -1,6 +1,5 @@
 package com.daily;
 
-import org.junit.Test;
 
 /**
  * Created by json on 2018/7/24.
