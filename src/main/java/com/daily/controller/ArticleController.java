@@ -3,6 +3,8 @@ package com.daily.controller;
 import com.daily.mybatis.entity.JsonMessage;
 import com.daily.service.ArticleService;
 import com.daily.utils.ParamUtils;
+import com.daily.utils.WebSocketServerDemo;
+import com.daily.utils.WsPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,9 @@ public class ArticleController {
         Map param = ParamUtils.getParam(request);
         try {
             articleService.createArticle(param);
+            //推送消息
+            WebSocketServerDemo tom = WsPool.getWebsSocketByUserName("tom");
+            tom.sendMessage("tom用户你好， 你关注的用户发表新文章了！快去查看吧！！！");
         } catch (Exception e) {
             logger.error(e.toString());
             e.printStackTrace();

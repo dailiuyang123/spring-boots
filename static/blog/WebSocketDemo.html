@@ -10,6 +10,11 @@
 <body>
 <div>
     <input type="button" id="btnConnection" value="连接" />
+    <br>
+    <input type="text" id="userName" ><font>用户名/可选</font>
+    <input type="button" id="btnlogin" value="登陆"/>
+    <br>
+    <hr>
     <input type="button" id="btnClose" value="关闭" />
     <input type="button" id="btnSend" value="发送" />
 </div>
@@ -41,6 +46,14 @@
         socket.onerror = function() {
             alert("发生了错误");
         }
+    });
+
+    //登陆
+    $("#btnlogin").click(function(){
+        var userName=$("#userName").val();
+        console.log(userName);
+        socket.send("userName:"+userName);
+
     });
 
     //发送消息
