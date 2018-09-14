@@ -1,5 +1,7 @@
 package com.daily.utils;
 
+import com.alibaba.fastjson.JSONObject;
+import com.daily.common.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -8,6 +10,9 @@ import org.springframework.stereotype.Component;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.Date;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by json on 2018/9/4.
@@ -28,7 +33,7 @@ public class WebSocketServerDemo {
     @OnOpen
     public void onOpen(Session session) {
         logger.error("连接部分已执行。。。。");
-        currentUser = "tom";
+//        currentUser = "tom";
         this.session=session;
         System.out.println("Connected ... " + session.getId());
     }
@@ -37,6 +42,7 @@ public class WebSocketServerDemo {
     @OnMessage
     public String onMessage(String message, Session session) {
         System.out.println(currentUser + "：" + message);
+        Message message1=new Message();
         //这里执行推送代码
         boolean userName = message.startsWith("userName");
         if (userName){
@@ -46,14 +52,16 @@ public class WebSocketServerDemo {
             this.setCurrentUser(user);
             //将此链接 加入到连接池中
             WsPool.addWebSocket(this);
+            message1.setUser(user);
         }
-
-        try {
-            this.sendMessage("服务端已经收到！");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return currentUser + "服务端 ：" + message;
+        Set<WebSocketServerDemo> allWebSockets = WsPool.getAllWebSockets();
+        message1.setOnline((long) allWebSockets.size());
+        message1.setFlag("1");
+        message1.setData(message);
+        message1.setDate(new Date());
+        String s = JSONObject.toJSONString(message1);
+        this.sendAll(s);
+        return null;
     }
 
 
@@ -61,6 +69,8 @@ public class WebSocketServerDemo {
     @OnClose
     public void onClose(Session session, CloseReason closeReason) {
         System.out.println(String.format("Session %s closed because of %s", session.getId(), closeReason));
+        //除去 WSpool 连接池内的失效链接
+        WsPool.removeWebSocket(session);
     }
 
     //连接错误时执行
@@ -84,6 +94,27 @@ public class WebSocketServerDemo {
     }
 
 
+    /**
+    *
+    * 作者  json
+    * 时间  2018/9/13 17:43
+    * 描述 群发消息接口
+    *
+    **/
+    public void sendAll(String message){
+        Set<WebSocketServerDemo> allWebSockets = WsPool.getAllWebSockets();
+        allWebSockets.forEach(o->{
+            try {
+                o.sendMessage(message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        });
+
+
+    }
+
     public String getCurrentUser() {
         return currentUser;
     }
@@ -98,5 +129,15 @@ public class WebSocketServerDemo {
 
     public void setSession(Session session) {
         this.session = session;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }

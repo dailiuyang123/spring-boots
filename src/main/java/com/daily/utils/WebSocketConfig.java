@@ -12,6 +12,8 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 @Configuration
 public class WebSocketConfig {
 
+    //此种注解方式为 ：Java Config 注入对象。
+    //Java Config 解读：比如第三方类库的组件, 可以使用java config的方式装配
     @Bean
     public ServerEndpointExporter serverEndpointExporter (){
         return new ServerEndpointExporter();

@@ -23,6 +23,11 @@ public class StreamTest {
         Long nu= nums.stream().filter(num->num!=null).count();
         System.out.println("测试不是null元素的次数："+nu);
 
+        Class<StreamTest> streamTestClass = StreamTest.class;
+        String name = streamTestClass.getName();
+
+        System.out.println(name);
+
         //
         Talk talk=new Talk();
         talk.setCreateTime(new Date());
@@ -32,14 +37,35 @@ public class StreamTest {
             e.printStackTrace();
         }
         talk.setUpdateTime(new Date());
+        talk.setStar(3);
         List<Talk> talks=new ArrayList<>();
         Talk talk1=new Talk();
         talk1.setCreateTime(new Date());
         talk1.setUpdateTime(new Date());
+        talk1.setStar(2);
+        Talk talk2=new Talk();
+        talk2.setStar(2);
         talks.add(talk);
         talks.add(talk1);
-        List<Talk> talks1=talks.stream().filter(o->{return !o.getCreateTime().equals(o.getUpdateTime()) ;}).collect(Collectors.toList());
-        System.out.println(talks1);
+        talks.add(talk2);
+       // List<Talk> talks1=talks.stream().filter(o->{return !o.getCreateTime().equals(o.getUpdateTime()) ;}).collect(Collectors.toList());
+
+        //聚合操作
+        //按star数 排序 从小到大
+        //排序 用 stream.sorted()方法
+        List<Talk> talks2 = talks.stream().sorted((x, y) -> {return x.getStar() > y.getStar() ? 1 : -1;}).collect(Collectors.toList());
+        talks2.forEach(o->{
+            System.out.println(o);
+        });
+
+        //获取 star数 为 2
+        // 用 stream.filter() 方法
+        List<Talk> talks3= talks.stream().filter(o->{return o.getStar()==2;}).collect(Collectors.toList());
+        talks3.forEach(o->{
+            System.out.println(o);
+        });
+
+//        System.out.println(talks1);
     }
 
 

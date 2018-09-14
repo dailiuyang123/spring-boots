@@ -1,8 +1,7 @@
 package com.daily.utils;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import javax.websocket.Session;
+import java.util.*;
 
 /**
  * Created by json on 2018/9/7.
@@ -50,9 +49,30 @@ public class WsPool {
     * 描述 移除 websocket连接
     *
     **/
-    public boolean removeWebSocket(WebSocketServerDemo webSocketServerDemo){
-        boolean flag=false;
-        flag = wsMap.remove(webSocketServerDemo, webSocketServerDemo.getCurrentUser());
-        return flag;
+    public static boolean removeWebSocket(Session session){
+        final boolean[] flag = {false};
+        Set<WebSocketServerDemo> webSocketServerDemos = wsMap.keySet();
+        Iterator<WebSocketServerDemo> iterator = webSocketServerDemos.iterator();
+        while (iterator.hasNext()){
+            WebSocketServerDemo next = iterator.next();
+            if (next.getSession().getId().equals(session.getId())){
+                wsMap.remove(next);
+                flag[0] =true;
+            }
+
+        }
+        return flag[0];
     }
+
+    /**
+    *
+    * 作者  json
+    * 时间  2018/9/13 17:52
+    * 描述 获取 所有的链接
+    *
+    **/
+    public static Set<WebSocketServerDemo> getAllWebSockets(){
+        return wsMap.keySet();
+    }
+
 }

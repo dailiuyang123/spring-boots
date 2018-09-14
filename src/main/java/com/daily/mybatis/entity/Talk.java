@@ -326,4 +326,20 @@ public class Talk implements Serializable {
     public void setDislike(Integer dislike) {
         this.dislike = dislike;
     }
+
+    @Override
+    public String toString() {
+        return "Talk{" +
+                "id='" + id + '\'' +
+                ", shopId='" + shopId + '\'' +
+                ", type='" + type + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", createUserName='" + createUserName + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", star=" + star +
+                ", dislike=" + dislike +
+                '}';
+    }
 }
