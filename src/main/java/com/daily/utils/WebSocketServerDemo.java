@@ -77,6 +77,7 @@ public class WebSocketServerDemo {
     @OnError
     public void onError(Throwable t) {
         t.printStackTrace();
+        System.out.println("啦啦啦，德玛西亚");
     }
 
 
