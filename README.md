@@ -9,7 +9,7 @@ springboot demo
     <li> wangUedit</li>
     <li> spring boot</li>
     <li> jquery</li>
-    <li>openffice-办公套件</li>
+    <li>openoffice-办公套件</li>
     <li>WebSocket</li>
     <ui>
 <h2>此外还包括：</h2>
