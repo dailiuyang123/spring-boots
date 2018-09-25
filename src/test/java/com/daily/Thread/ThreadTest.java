@@ -14,6 +14,14 @@ public class ThreadTest {
         // 1）：适合多个相同的程序代码的线程去处理同一个资源
         // 2）：可以避免java中的单继承的限制
         // 3）：增加程序的健壮性，代码可以被多个线程共享，代码和数据独立
+
+        //线程类的一些常用方法
+        //notify(): 通知一个线程继续运行。
+        //wait(): 强迫一个线程等待。          (释放锁)
+        //sleep(): 强迫一个线程睡眠Ｎ毫秒     （不释放锁）
+
+        //状态转换
+        //新建状态（New） 就绪状态（Runnable） 运行状态（Running）阻塞状态（Blocked） 死亡状态（Dead）
         new Thread(myC, "C").start();
         new Thread(myC, "D").start();
 //        myA.start();
